@@ -2,10 +2,10 @@
 // Based on the clean, modern dashboard design
 
 // Import parent theme styles
-@import "boost";
+@import "../../boost/style/moodle";
 
 // Color Variables
-$primary-color: #3b82f6; // Blue
+$primary: #3b82f6; // Blue
 $secondary-color: #f59e0b; // Orange
 $success-color: #10b981; // Green
 $danger-color: #ef4444; // Red
@@ -181,7 +181,7 @@ body {
             transition: width 0.3s ease;
             
             &.primary {
-                background-color: $primary-color;
+                background-color: $primary;
             }
             
             &.secondary {
@@ -208,7 +208,7 @@ body {
             transition: background-color 0.2s ease;
             
             &.active {
-                background-color: $primary-color;
+                background-color: $primary;
                 background-image: repeating-linear-gradient(
                     45deg,
                     transparent,
@@ -219,7 +219,7 @@ body {
             }
             
             &.highlighted {
-                background-color: $primary-color;
+                background-color: $primary;
             }
         }
     }
@@ -253,7 +253,7 @@ body {
             transition: all 0.2s ease;
             
             &.completed {
-                background-color: $primary-color;
+                background-color: $primary;
                 color: white;
                 
                 &::after {
@@ -305,7 +305,7 @@ body {
                 height: 32px;
                 border-radius: 50%;
                 margin-right: $spacing-sm;
-                background-color: $primary-color;
+                background-color: $primary;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -362,7 +362,7 @@ body {
                     transition: all 0.2s ease;
                     
                     &.active {
-                        background-color: $primary-color;
+                        background-color: $primary;
                         color: white;
                     }
                     
@@ -392,7 +392,7 @@ body {
                 margin-right: $spacing-xs;
                 
                 &.primary {
-                    background-color: $primary-color;
+                    background-color: $primary;
                 }
                 
                 &.secondary {

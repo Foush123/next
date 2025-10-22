@@ -13,8 +13,8 @@ $THEME->name = 'photo';
                                                                                                                                     
 // This setting list the style sheets we want to include in our theme. Because we want to use SCSS instead of CSS - we won't        
 // list any style sheets. If we did we would list the name of a file in the /style/ folder for our theme without any css file      
-// extensions.                                                                                                                      
-$THEME->sheets = ['moodle'];                                                                                                                
+// extensions.                                                                                                                  
+$THEME->sheets = [];
                                                                                                                                     
 // This is a setting that can be used to provide some styling to the content in the TinyMCE text editor. This is no longer the      
 // default text editor and "Atto" does not need this setting so we won't provide anything. If we did it would work the same         
@@ -75,16 +75,11 @@ $THEME->layouts = [
     ],
 ];
 
-// Additional CSS for the theme
-$THEME->css = function($theme) {
-    return [
-        'moodle' => 'moodle.css'
-    ];
-};
+// Additional CSS for the theme - handled by SCSS compilation
 
 // SCSS variables
 $THEME->scss_variables = function($theme) {
     return [
-        'primary-color' => $theme->settings->brandcolor ?? '#3b82f6',
+        'primary' => $theme->settings->brandcolor ?? '#3b82f6',
     ];
 };
