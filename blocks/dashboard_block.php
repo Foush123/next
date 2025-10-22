@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Two column layout for the Photo theme.
+ * Dashboard block for the Photo theme.
  *
  * @package    theme_photo
  * @copyright  2024 Your Name
@@ -24,5 +24,35 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Include the parent layout
-require_once($CFG->dirroot . '/theme/boost/layout/columns2.php');
+class block_dashboard extends block_base {
+    
+    public function init() {
+        $this->title = get_string('dashboard', 'theme_photo');
+    }
+    
+    public function get_content() {
+        global $OUTPUT;
+        
+        if ($this->content !== null) {
+            return $this->content;
+        }
+        
+        $this->content = new stdClass();
+        $this->content->text = $OUTPUT->render_from_template('theme_photo/blocks/dashboard_block', []);
+        $this->content->footer = '';
+        
+        return $this->content;
+    }
+    
+    public function applicable_formats() {
+        return array(
+            'site' => true,
+            'course' => true,
+            'my' => true,
+        );
+    }
+    
+    public function has_config() {
+        return false;
+    }
+}

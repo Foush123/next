@@ -1,0 +1,435 @@
+/* Modern Dashboard Theme for Moodle */
+/* This file will be generated from moodle.scss */
+
+/* Basic dashboard styles */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card.card-small {
+    padding: 1rem;
+}
+
+.dashboard-card.card-large {
+    padding: 2rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0.5rem 0;
+    line-height: 1;
+}
+
+.metric-change {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.metric-change.positive {
+    color: #10b981;
+}
+
+.metric-change.negative {
+    color: #ef4444;
+}
+
+.metric-change.neutral {
+    color: #64748b;
+}
+
+.change-icon {
+    margin-right: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.metric-label {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+.progress-container {
+    margin-top: 1rem;
+}
+
+.progress-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-label {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.progress-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-fill.primary {
+    background-color: #3b82f6;
+}
+
+.progress-fill.secondary {
+    background-color: #f59e0b;
+}
+
+.mini-chart {
+    margin-top: 1rem;
+}
+
+.chart-bars {
+    display: flex;
+    align-items: end;
+    gap: 2px;
+    height: 40px;
+}
+
+.chart-bar {
+    flex: 1;
+    background-color: #e2e8f0;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+}
+
+.chart-bar.active {
+    background-color: #3b82f6;
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.1) 2px,
+        rgba(255, 255, 255, 0.1) 4px
+    );
+}
+
+.chart-bar.highlighted {
+    background-color: #3b82f6;
+}
+
+.chart-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+.streak-container {
+    margin-top: 1rem;
+}
+
+.streak-days {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.streak-day {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.streak-day.completed {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.streak-day.completed::after {
+    content: '✓';
+    font-size: 10px;
+    margin-left: 2px;
+}
+
+.streak-day.incomplete {
+    background-color: white;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.streak-day.incomplete::after {
+    content: '✓';
+    font-size: 10px;
+    margin-left: 2px;
+    color: #e2e8f0;
+}
+
+.streak-info {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.ranking-container {
+    margin-top: 1rem;
+}
+
+.ranking-list .ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.ranking-list .ranking-item:last-child {
+    border-bottom: none;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: #3b82f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.chart-container {
+    margin-top: 1.5rem;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.chart-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.time-selector {
+    display: flex;
+    background-color: #f1f5f9;
+    border-radius: 0.5rem;
+    padding: 2px;
+}
+
+.time-btn {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    background: none;
+    border-radius: calc(0.5rem - 2px);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.time-btn.active {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.time-btn:hover:not(.active) {
+    color: #1e293b;
+}
+
+.chart-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+}
+
+.legend-dot.primary {
+    background-color: #3b82f6;
+}
+
+.legend-dot.secondary {
+    background-color: #f59e0b;
+}
+
+.chart-content {
+    position: relative;
+    height: 300px;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.chart-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #64748b;
+    font-size: 1.125rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .chart-controls {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Override Moodle default styles */
+#page {
+    background-color: #f8fafc;
+}
+
+.page-header {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.course-content {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+}
+
+.navbar {
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.block {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.block .header {
+    background: transparent;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1rem 1.5rem;
+}
+
+.block .header .title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.block .content {
+    padding: 1.5rem;
+}

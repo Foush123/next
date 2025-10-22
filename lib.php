@@ -106,3 +106,17 @@ function theme_photo_get_pre_regions() {
         'side-post' => 'side-post',
     ];
 }
+
+/**
+ * Add dashboard block to the page.
+ *
+ * @param moodle_page $page
+ */
+function theme_photo_add_dashboard_block($page) {
+    global $OUTPUT;
+    
+    // Only add to dashboard and course pages
+    if ($page->pagelayout === 'dashboard' || $page->pagelayout === 'course') {
+        $page->requires->js_call_amd('theme_photo/dashboard', 'init');
+    }
+}

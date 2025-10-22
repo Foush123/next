@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Two column layout for the Photo theme.
+ * Installation script for the Photo theme.
  *
  * @package    theme_photo
  * @copyright  2024 Your Name
@@ -24,5 +24,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// Include the parent layout
-require_once($CFG->dirroot . '/theme/boost/layout/columns2.php');
+/**
+ * Post installation hook for the theme.
+ */
+function xmldb_theme_photo_install() {
+    global $CFG;
+    
+    // Set default theme settings
+    set_config('brandcolor', '#3b82f6', 'theme_photo');
+    set_config('enabledashboard', 1, 'theme_photo');
+    set_config('showquizscores', 1, 'theme_photo');
+    set_config('showtimetracking', 1, 'theme_photo');
+    set_config('showstreak', 1, 'theme_photo');
+    set_config('showrankings', 1, 'theme_photo');
+    
+    return true;
+}

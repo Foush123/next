@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Theme Dashboard Test</title>
+    <link rel="stylesheet" href="style/moodle.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top Cards Grid -->
+        <div class="dashboard-grid">
+            <!-- Avg Quiz Score Card -->
+            <div class="dashboard-card card-small">
+                <div class="card-header">
+                    <h3 class="card-title">Avg Quiz Score</h3>
+                </div>
+                <div class="metric-value">82%</div>
+                <div class="metric-change negative">
+                    <span class="change-icon">▼</span>
+                    -10%
+                </div>
+                <div class="progress-container">
+                    <div class="progress-item">
+                        <span class="progress-label">Highest Score</span>
+                        <span class="progress-value">92.5%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill primary" style="width: 92.5%"></div>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Lowest Score</span>
+                        <span class="progress-value">64.25%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill secondary" style="width: 64.25%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Time Spent Card -->
+            <div class="dashboard-card card-small">
+                <div class="card-header">
+                    <h3 class="card-title">Total Time Spent</h3>
+                    <span class="card-subtitle">This Week</span>
+                </div>
+                <div class="metric-value">12 Hours</div>
+                <div class="metric-change negative">
+                    <span class="change-icon">▼</span>
+                    -12.00%
+                </div>
+                <div class="mini-chart">
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 20%"></div>
+                        <div class="chart-bar" style="height: 35%"></div>
+                        <div class="chart-bar" style="height: 25%"></div>
+                        <div class="chart-bar" style="height: 40%"></div>
+                        <div class="chart-bar" style="height: 30%"></div>
+                        <div class="chart-bar" style="height: 45%"></div>
+                        <div class="chart-bar active" style="height: 90%"></div>
+                    </div>
+                    <div class="chart-label">9.5H</div>
+                </div>
+            </div>
+
+            <!-- Weekly Streak Card -->
+            <div class="dashboard-card card-small">
+                <div class="card-header">
+                    <h3 class="card-title">Weekly Streak</h3>
+                </div>
+                <div class="metric-value">5 Days</div>
+                <div class="streak-container">
+                    <div class="streak-days">
+                        <div class="streak-day completed">01</div>
+                        <div class="streak-day completed">02</div>
+                        <div class="streak-day completed">03</div>
+                        <div class="streak-day completed">04</div>
+                        <div class="streak-day completed">05</div>
+                        <div class="streak-day incomplete">06</div>
+                        <div class="streak-day incomplete">07</div>
+                        <div class="streak-day incomplete">08</div>
+                        <div class="streak-day incomplete">09</div>
+                        <div class="streak-day incomplete">10</div>
+                    </div>
+                    <div class="streak-info">Longest Streak: 15 days</div>
+                </div>
+            </div>
+
+            <!-- Global Ranking Card -->
+            <div class="dashboard-card card-small">
+                <div class="card-header">
+                    <h3 class="card-title">Global Ranking</h3>
+                </div>
+                <div class="metric-value">#15</div>
+                <div class="metric-label">of 23K learners</div>
+                <div class="metric-label">Top local rank</div>
+                <div class="ranking-container">
+                    <div class="ranking-list">
+                        <div class="ranking-item">
+                            <div class="avatar">BS</div>
+                            <div class="name">Brooklyn Simmons</div>
+                        </div>
+                        <div class="ranking-item">
+                            <div class="avatar">AB</div>
+                            <div class="name">Annette Black</div>
+                        </div>
+                        <div class="ranking-item">
+                            <div class="avatar">GH</div>
+                            <div class="name">Guy Hawkins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Large Chart Card -->
+        <div class="dashboard-card card-large">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 class="chart-title">Monthly Course Enrollments & Completion Rates</h3>
+                    <div class="chart-controls">
+                        <div class="time-selector">
+                            <button class="time-btn active" data-period="1-year">1 Year</button>
+                            <button class="time-btn" data-period="6-months">6 Months</button>
+                            <button class="time-btn" data-period="3-months">3 Months</button>
+                            <button class="time-btn" data-period="1-month">1 Month</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-value">Avg per month: 1,250,00</div>
+                <div class="metric-change positive">
+                    <span class="change-icon">▲</span>
+                    13.4%
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot primary"></div>
+                        <span>Completion Rate (%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot secondary"></div>
+                        <span>Enrollments</span>
+                    </div>
+                </div>
+                <div class="chart-content">
+                    <div class="chart-placeholder">
+                        <canvas id="enrollmentChart" width="800" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple JavaScript for time selector
+        document.querySelectorAll('.time-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Simple chart placeholder
+        const canvas = document.getElementById('enrollmentChart');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw a simple placeholder chart
+        ctx.fillStyle = '#f1f5f9';
+        ctx.fillRect(0, 0, 800, 200);
+        
+        ctx.fillStyle = '#3b82f6';
+        ctx.font = '16px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Interactive Chart Placeholder', 400, 100);
+        ctx.fillText('(Chart.js integration in Moodle)', 400, 120);
+    </script>
+</body>
+</html>

@@ -15,14 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Two column layout for the Photo theme.
+ * Dashboard page for the Photo theme.
  *
  * @package    theme_photo
  * @copyright  2024 Your Name
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+require_once('../../config.php');
 
-// Include the parent layout
-require_once($CFG->dirroot . '/theme/boost/layout/columns2.php');
+$PAGE->set_url('/theme/photo/pages/dashboard.php');
+$PAGE->set_context(context_system::instance());
+$PAGE->set_title(get_string('dashboard', 'theme_photo'));
+$PAGE->set_heading(get_string('dashboard', 'theme_photo'));
+$PAGE->set_pagelayout('dashboard');
+
+echo $OUTPUT->header();
+
+echo $OUTPUT->render_from_template('theme_photo/dashboard', []);
+
+echo $OUTPUT->footer();

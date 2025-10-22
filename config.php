@@ -81,3 +81,10 @@ $THEME->css = function($theme) {
         'moodle' => 'moodle.css'
     ];
 };
+
+// SCSS variables
+$THEME->scss_variables = function($theme) {
+    return [
+        'primary-color' => $theme->settings->brandcolor ?? '#3b82f6',
+    ];
+};
