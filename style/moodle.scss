@@ -1,402 +1,508 @@
-// Modern Dashboard Theme for Moodle
-// Based on the clean, modern dashboard design
+// Next Theme - Modern Learning Management System
+// A tech-savvy, engaging theme for Next LMS
 
 // Import parent theme styles
 @import "../../boost/style/moodle";
 
-// Color Variables
-$primary: #3b82f6; // Blue
-$secondary-color: #f59e0b; // Orange
-$success-color: #10b981; // Green
-$danger-color: #ef4444; // Red
-$warning-color: #f59e0b; // Orange
-$info-color: #06b6d4; // Cyan
-$light-color: #f8fafc; // Light gray
-$dark-color: #1e293b; // Dark gray
-$muted-color: #64748b; // Muted gray
+// ========================================
+// DESIGN SYSTEM VARIABLES
+// ========================================
 
-// Dashboard specific colors
-$card-bg: #ffffff;
-$card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-$card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$border-radius: 0.5rem;
-$border-radius-lg: 0.75rem;
+// Color Palette - Tech-inspired with vibrant accents
+$primary: #6366f1 !default;           // Indigo - Primary brand color
+$secondary: #8b5cf6 !default;         // Purple - Secondary brand color
+$accent: #06b6d4 !default;           // Cyan - Accent color for highlights
+$success: #10b981 !default;          // Emerald - Success states
+$warning: #f59e0b !default;          // Amber - Warning states
+$danger: #ef4444 !default;            // Red - Error states
+$dark: #1e293b !default;             // Slate - Dark text
+$light: #f8fafc !default;            // Slate - Light background
+
+// Gradient Definitions
+$gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !default;
+$gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #10b981 100%) !default;
+$gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%) !default;
+$gradient-dark: linear-gradient(135deg, #1e293b 0%, #334155 100%) !default;
 
 // Typography
-$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$font-size-base: 0.875rem;
-$font-size-lg: 1rem;
-$font-size-xl: 1.125rem;
-$font-size-2xl: 1.5rem;
-$font-size-3xl: 2rem;
-$font-size-4xl: 2.5rem;
+$font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Cascadia Code', monospace !default;
 
-// Spacing
-$spacing-xs: 0.25rem;
-$spacing-sm: 0.5rem;
-$spacing-md: 1rem;
-$spacing-lg: 1.5rem;
-$spacing-xl: 2rem;
-$spacing-2xl: 3rem;
+// Font Sizes
+$font-size-xs: 0.75rem !default;      // 12px
+$font-size-sm: 0.875rem !default;    // 14px
+$font-size-base: 1rem !default;      // 16px
+$font-size-lg: 1.125rem !default;    // 18px
+$font-size-xl: 1.25rem !default;     // 20px
+$font-size-2xl: 1.5rem !default;     // 24px
+$font-size-3xl: 1.875rem !default;   // 30px
+$font-size-4xl: 2.25rem !default;    // 36px
+$font-size-5xl: 3rem !default;       // 48px
 
-// Global Styles
+// Spacing Scale
+$spacing-1: 0.25rem !default;        // 4px
+$spacing-2: 0.5rem !default;         // 8px
+$spacing-3: 0.75rem !default;        // 12px
+$spacing-4: 1rem !default;           // 16px
+$spacing-5: 1.25rem !default;        // 20px
+$spacing-6: 1.5rem !default;         // 24px
+$spacing-8: 2rem !default;           // 32px
+$spacing-10: 2.5rem !default;        // 40px
+$spacing-12: 3rem !default;           // 48px
+$spacing-16: 4rem !default;          // 64px
+$spacing-20: 5rem !default;           // 80px
+
+// Border Radius
+$border-radius-sm: 0.375rem !default; // 6px
+$border-radius: 0.5rem !default;      // 8px
+$border-radius-md: 0.75rem !default; // 12px
+$border-radius-lg: 1rem !default;     // 16px
+$border-radius-xl: 1.5rem !default;   // 24px
+$border-radius-full: 9999px !default;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+
+// Transitions
+$transition-fast: 0.15s ease-in-out !default;
+$transition-base: 0.3s ease-in-out !default;
+$transition-slow: 0.5s ease-in-out !default;
+
+// ========================================
+// GLOBAL STYLES
+// ========================================
+
+// Root variables for CSS custom properties
+:root {
+    --primary: #{$primary};
+    --secondary: #{$secondary};
+    --accent: #{$accent};
+    --success: #{$success};
+    --warning: #{$warning};
+    --danger: #{$danger};
+    --dark: #{$dark};
+    --light: #{$light};
+    
+    --gradient-primary: #{$gradient-primary};
+    --gradient-secondary: #{$gradient-secondary};
+    --gradient-accent: #{$gradient-accent};
+    --gradient-dark: #{$gradient-dark};
+    
+    --font-family-primary: #{$font-family-primary};
+    --font-family-mono: #{$font-family-mono};
+    
+    --shadow-sm: #{$shadow-sm};
+    --shadow: #{$shadow};
+    --shadow-md: #{$shadow-md};
+    --shadow-lg: #{$shadow-lg};
+    --shadow-xl: #{$shadow-xl};
+    
+    --transition-fast: #{$transition-fast};
+    --transition-base: #{$transition-base};
+    --transition-slow: #{$transition-slow};
+}
+
+// Base body styles
 body {
-    font-family: $font-family-sans-serif;
-    background-color: $light-color;
-    color: $dark-color;
+    font-family: $font-family-primary;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: $dark;
     line-height: 1.6;
+    font-size: $font-size-base;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-// Dashboard Container
+// ========================================
+// NAVIGATION & HEADER
+// ========================================
+
+.navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: $shadow-sm;
+    transition: all $transition-base;
+    
+    &.scrolled {
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: $shadow-md;
+    }
+    
+    .navbar-brand {
+        font-weight: 700;
+        font-size: $font-size-xl;
+        background: $gradient-primary;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .nav-link {
+        color: $dark;
+        font-weight: 500;
+        padding: $spacing-2 $spacing-4;
+        border-radius: $border-radius;
+        transition: all $transition-fast;
+        
+        &:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: $primary;
+        }
+        
+        &.active {
+            background: $gradient-primary;
+            color: white;
+        }
+    }
+}
+
+// ========================================
+// DASHBOARD LAYOUT
+// ========================================
+
 .dashboard-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: $spacing-lg;
+    padding: $spacing-6;
+    
+    @media (max-width: 768px) {
+        padding: $spacing-4;
+    }
 }
 
-// Card Component
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: $spacing-6;
+    margin-bottom: $spacing-8;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: $spacing-4;
+    }
+}
+
+// ========================================
+// CARD COMPONENTS
+// ========================================
+
 .dashboard-card {
-    background: $card-bg;
-    border-radius: $border-radius;
-    box-shadow: $card-shadow;
-    padding: $spacing-lg;
-    margin-bottom: $spacing-lg;
-    transition: box-shadow 0.2s ease-in-out;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow;
+    padding: $spacing-6;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    transition: all $transition-base;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: $gradient-primary;
+        border-radius: $border-radius-lg $border-radius-lg 0 0;
+    }
     
     &:hover {
-        box-shadow: $card-shadow-hover;
+        transform: translateY(-2px);
+        box-shadow: $shadow-lg;
+        border-color: rgba(99, 102, 241, 0.2);
     }
     
     &.card-small {
-        padding: $spacing-md;
+        padding: $spacing-4;
     }
     
     &.card-large {
-        padding: $spacing-xl;
+        padding: $spacing-8;
+    }
+    
+    &.card-featured {
+        background: $gradient-primary;
+        color: white;
+        
+        &::before {
+            display: none;
+        }
+        
+        .card-title,
+        .metric-value,
+        .metric-label {
+            color: white;
+        }
     }
 }
 
-// Card Grid Layout
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $spacing-lg;
-    margin-bottom: $spacing-xl;
-}
-
-// Card Header
 .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: $spacing-md;
+    align-items: flex-start;
+    margin-bottom: $spacing-4;
     
     .card-title {
         font-size: $font-size-lg;
         font-weight: 600;
-        color: $dark-color;
+        color: $dark;
         margin: 0;
+        line-height: 1.4;
     }
     
     .card-subtitle {
-        font-size: $font-size-base;
-        color: $muted-color;
+        font-size: $font-size-sm;
+        color: rgba(100, 116, 139, 0.8);
         margin: 0;
+    }
+    
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: $border-radius-md;
+        background: $gradient-primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: $font-size-xl;
+        flex-shrink: 0;
     }
 }
 
-// Metric Display
+// ========================================
+// METRICS & STATS
+// ========================================
+
 .metric {
     &-value {
         font-size: $font-size-4xl;
         font-weight: 700;
-        color: $dark-color;
-        margin: $spacing-sm 0;
+        color: $dark;
+        margin: $spacing-2 0;
         line-height: 1;
+        background: $gradient-primary;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     &-change {
         display: flex;
         align-items: center;
         font-size: $font-size-sm;
-        font-weight: 500;
+        font-weight: 600;
+        margin-top: $spacing-2;
         
         &.positive {
-            color: $success-color;
+            color: $success;
         }
         
         &.negative {
-            color: $danger-color;
+            color: $danger;
         }
         
         &.neutral {
-            color: $muted-color;
+            color: rgba(100, 116, 139, 0.8);
         }
         
         .change-icon {
-            margin-right: $spacing-xs;
+            margin-right: $spacing-1;
             font-size: $font-size-xs;
         }
     }
     
     &-label {
         font-size: $font-size-sm;
-        color: $muted-color;
-        margin-bottom: $spacing-xs;
+        color: rgba(100, 116, 139, 0.8);
+        margin-bottom: $spacing-1;
+        font-weight: 500;
     }
 }
 
-// Progress Bars
+// ========================================
+// PROGRESS COMPONENTS
+// ========================================
+
 .progress-container {
-    margin-top: $spacing-md;
+    margin-top: $spacing-4;
     
     .progress-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: $spacing-sm;
+        margin-bottom: $spacing-3;
         
         .progress-label {
             font-size: $font-size-sm;
-            color: $muted-color;
+            color: rgba(100, 116, 139, 0.8);
+            font-weight: 500;
         }
         
         .progress-value {
             font-size: $font-size-sm;
             font-weight: 600;
-            color: $dark-color;
+            color: $dark;
         }
     }
     
     .progress-bar {
         height: 8px;
-        background-color: #e2e8f0;
-        border-radius: 4px;
+        background: rgba(226, 232, 240, 0.5);
+        border-radius: $border-radius-full;
         overflow: hidden;
-        margin-top: $spacing-xs;
+        margin-top: $spacing-2;
         
         .progress-fill {
             height: 100%;
-            border-radius: 4px;
-            transition: width 0.3s ease;
+            border-radius: $border-radius-full;
+            transition: width $transition-slow;
+            position: relative;
             
             &.primary {
-                background-color: $primary;
+                background: $gradient-primary;
             }
             
             &.secondary {
-                background-color: $secondary-color;
+                background: $gradient-secondary;
+            }
+            
+            &.accent {
+                background: $gradient-accent;
+            }
+            
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                animation: shimmer 2s infinite;
             }
         }
     }
 }
 
-// Mini Chart
-.mini-chart {
-    margin-top: $spacing-md;
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+// ========================================
+// INTERACTIVE ELEMENTS
+// ========================================
+
+.btn {
+    border-radius: $border-radius;
+    font-weight: 500;
+    padding: $spacing-2 $spacing-4;
+    transition: all $transition-fast;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     
-    .chart-bars {
-        display: flex;
-        align-items: end;
-        gap: 2px;
-        height: 40px;
+    &.btn-primary {
+        background: $gradient-primary;
+        color: white;
+        box-shadow: $shadow;
         
-        .chart-bar {
-            flex: 1;
-            background-color: #e2e8f0;
-            border-radius: 2px;
-            transition: background-color 0.2s ease;
-            
-            &.active {
-                background-color: $primary;
-                background-image: repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.1) 2px,
-                    rgba(255, 255, 255, 0.1) 4px
-                );
-            }
-            
-            &.highlighted {
-                background-color: $primary;
-            }
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: $shadow-md;
         }
     }
     
-    .chart-label {
-        font-size: $font-size-xs;
-        color: $muted-color;
-        text-align: center;
-        margin-top: $spacing-xs;
-    }
-}
-
-// Streak Component
-.streak-container {
-    margin-top: $spacing-md;
-    
-    .streak-days {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: $spacing-sm;
+    &.btn-secondary {
+        background: rgba(99, 102, 241, 0.1);
+        color: $primary;
+        border: 1px solid rgba(99, 102, 241, 0.2);
         
-        .streak-day {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: $font-size-xs;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            
-            &.completed {
-                background-color: $primary;
-                color: white;
-                
-                &::after {
-                    content: '✓';
-                    font-size: 10px;
-                    margin-left: 2px;
-                }
-            }
-            
-            &.incomplete {
-                background-color: white;
-                color: $muted-color;
-                border: 1px solid #e2e8f0;
-                
-                &::after {
-                    content: '✓';
-                    font-size: 10px;
-                    margin-left: 2px;
-                    color: #e2e8f0;
-                }
-            }
+        &:hover {
+            background: rgba(99, 102, 241, 0.2);
         }
     }
     
-    .streak-info {
-        margin-top: $spacing-sm;
-        font-size: $font-size-sm;
-        color: $muted-color;
-    }
-}
-
-// Ranking Component
-.ranking-container {
-    margin-top: $spacing-md;
-    
-    .ranking-list {
-        .ranking-item {
-            display: flex;
-            align-items: center;
-            padding: $spacing-sm 0;
-            border-bottom: 1px solid #f1f5f9;
-            
-            &:last-child {
-                border-bottom: none;
-            }
-            
-            .avatar {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                margin-right: $spacing-sm;
-                background-color: $primary;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: white;
-                font-weight: 600;
-                font-size: $font-size-sm;
-            }
-            
-            .name {
-                font-size: $font-size-sm;
-                font-weight: 500;
-                color: $dark-color;
-            }
+    &.btn-ghost {
+        background: transparent;
+        color: $dark;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        
+        &:hover {
+            background: rgba(248, 250, 252, 0.8);
         }
     }
 }
 
-// Chart Component
+// ========================================
+// CHARTS & VISUALIZATIONS
+// ========================================
+
 .chart-container {
-    margin-top: $spacing-lg;
+    margin-top: $spacing-6;
     
     .chart-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: $spacing-lg;
+        margin-bottom: $spacing-6;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: $spacing-4;
+        }
         
         .chart-title {
             font-size: $font-size-xl;
             font-weight: 600;
-            color: $dark-color;
+            color: $dark;
             margin: 0;
         }
         
         .chart-controls {
             display: flex;
-            gap: $spacing-sm;
+            gap: $spacing-2;
             
             .time-selector {
                 display: flex;
-                background-color: #f1f5f9;
+                background: rgba(248, 250, 252, 0.8);
                 border-radius: $border-radius;
                 padding: 2px;
+                border: 1px solid rgba(226, 232, 240, 0.5);
                 
                 .time-btn {
-                    padding: $spacing-xs $spacing-sm;
+                    padding: $spacing-2 $spacing-3;
                     border: none;
                     background: none;
                     border-radius: calc(#{$border-radius} - 2px);
                     font-size: $font-size-sm;
                     font-weight: 500;
-                    color: $muted-color;
+                    color: rgba(100, 116, 139, 0.8);
                     cursor: pointer;
-                    transition: all 0.2s ease;
+                    transition: all $transition-fast;
                     
                     &.active {
-                        background-color: $primary;
+                        background: $gradient-primary;
                         color: white;
+                        box-shadow: $shadow-sm;
                     }
                     
                     &:hover:not(.active) {
-                        color: $dark-color;
+                        color: $dark;
+                        background: rgba(248, 250, 252, 0.8);
                     }
-                }
-            }
-        }
-    }
-    
-    .chart-legend {
-        display: flex;
-        gap: $spacing-lg;
-        margin-bottom: $spacing-md;
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            font-size: $font-size-sm;
-            color: $muted-color;
-            
-            .legend-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                margin-right: $spacing-xs;
-                
-                &.primary {
-                    background-color: $primary;
-                }
-                
-                &.secondary {
-                    background-color: $secondary-color;
                 }
             }
         }
@@ -405,111 +511,229 @@ body {
     .chart-content {
         position: relative;
         height: 300px;
-        background-color: #f8fafc;
-        border-radius: $border-radius;
-        padding: $spacing-lg;
+        background: rgba(248, 250, 252, 0.5);
+        border-radius: $border-radius-lg;
+        padding: $spacing-6;
+        border: 1px solid rgba(226, 232, 240, 0.3);
         
         .chart-placeholder {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: $muted-color;
+            color: rgba(100, 116, 139, 0.8);
             font-size: $font-size-lg;
+            font-weight: 500;
         }
     }
 }
 
-// Responsive Design
-@media (max-width: 768px) {
-    .dashboard-container {
-        padding: $spacing-md;
-    }
-    
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-        gap: $spacing-md;
-    }
-    
-    .chart-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: $spacing-md;
-    }
-    
-    .chart-controls {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-// Utility Classes
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: $spacing-xs; }
-.mb-2 { margin-bottom: $spacing-sm; }
-.mb-3 { margin-bottom: $spacing-md; }
-.mb-4 { margin-bottom: $spacing-lg; }
-.mb-5 { margin-bottom: $spacing-xl; }
-
-.mt-0 { margin-top: 0; }
-.mt-1 { margin-top: $spacing-xs; }
-.mt-2 { margin-top: $spacing-sm; }
-.mt-3 { margin-top: $spacing-md; }
-.mt-4 { margin-top: $spacing-lg; }
-.mt-5 { margin-top: $spacing-xl; }
-
-// Override Moodle default styles
-#page {
-    background-color: $light-color;
-}
-
-.page-header {
-    background: $card-bg;
-    border-radius: $border-radius;
-    box-shadow: $card-shadow;
-    margin-bottom: $spacing-lg;
-    padding: $spacing-lg;
-}
+// ========================================
+// COURSE LAYOUTS
+// ========================================
 
 .course-content {
-    background: $card-bg;
-    border-radius: $border-radius;
-    box-shadow: $card-shadow;
-    padding: $spacing-lg;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow;
+    padding: $spacing-8;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    margin-bottom: $spacing-6;
 }
 
-// Navigation improvements
-.navbar {
-    background: $card-bg !important;
-    box-shadow: $card-shadow;
-    border-radius: 0 0 $border-radius $border-radius;
+.course-header {
+    background: $gradient-primary;
+    color: white;
+    padding: $spacing-8;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-6;
+    
+    .course-title {
+        font-size: $font-size-3xl;
+        font-weight: 700;
+        margin: 0 0 $spacing-2 0;
+    }
+    
+    .course-subtitle {
+        font-size: $font-size-lg;
+        opacity: 0.9;
+        margin: 0;
+    }
 }
 
-// Block styling
+// ========================================
+// BLOCKS & SIDEBAR
+// ========================================
+
 .block {
-    background: $card-bg;
-    border-radius: $border-radius;
-    box-shadow: $card-shadow;
-    border: none;
-    margin-bottom: $spacing-lg;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    margin-bottom: $spacing-6;
+    overflow: hidden;
     
     .header {
-        background: transparent;
-        border-bottom: 1px solid #f1f5f9;
-        padding: $spacing-md $spacing-lg;
+        background: rgba(248, 250, 252, 0.8);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+        padding: $spacing-4 $spacing-6;
         
         .title {
             font-size: $font-size-lg;
             font-weight: 600;
-            color: $dark-color;
+            color: $dark;
+            margin: 0;
         }
     }
     
     .content {
-        padding: $spacing-lg;
+        padding: $spacing-6;
+    }
+}
+
+// ========================================
+// RESPONSIVE DESIGN
+// ========================================
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: $spacing-4;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: $spacing-4;
+    }
+    
+    .dashboard-card {
+        padding: $spacing-4;
+    }
+    
+    .metric-value {
+        font-size: $font-size-3xl;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: $spacing-3;
+    }
+    
+    .dashboard-card {
+        padding: $spacing-3;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-2;
+    }
+}
+
+// ========================================
+// ANIMATIONS & INTERACTIONS
+// ========================================
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+// ========================================
+// UTILITY CLASSES
+// ========================================
+
+.text-gradient {
+    background: $gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient {
+    background: $gradient-primary;
+}
+
+.shadow-glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// ========================================
+// DARK MODE SUPPORT
+// ========================================
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light: #1e293b;
+        --dark: #f8fafc;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        color: #f8fafc;
+    }
+    
+    .dashboard-card,
+    .block,
+    .course-content {
+        background: rgba(30, 41, 59, 0.9);
+        border-color: rgba(71, 85, 105, 0.3);
+    }
+    
+    .navbar {
+        background: rgba(30, 41, 59, 0.95) !important;
+        border-bottom-color: rgba(71, 85, 105, 0.3);
     }
 }

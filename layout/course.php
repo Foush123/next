@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Dashboard layout for the Next theme.
+ * Course layout for the Next theme.
  *
  * @package    theme_next
  * @copyright  2024 Next LMS
@@ -28,24 +28,22 @@ $user = $USER;
 $course = $this->page->course;
 $context = $this->page->context;
 
-// Get user learning progress
-$progress = theme_next_get_learning_progress($user->id);
-$recent_activity = theme_next_get_recent_activity($user->id, 5);
+// Get course statistics
+$course_stats = theme_next_get_course_stats($course->id);
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID)]),
     'output' => $this,
-    'sidepreblocks' => $this->blocks('side-pre', 'dashboard'),
-    'sidepostblocks' => $this->blocks('side-post', 'dashboard'),
-    'hasblocks' => $this->blocks('side-pre', 'dashboard') || $this->blocks('side-post', 'dashboard'),
+    'sidepreblocks' => $this->blocks('side-pre', 'course'),
+    'sidepostblocks' => $this->blocks('side-post', 'course'),
+    'hasblocks' => $this->blocks('side-pre', 'course') || $this->blocks('side-post', 'course'),
     'bodyattributes' => $this->body_attributes(),
     'regionmainsettingsmenu' => $this->region_main_settings_menu(),
     'hasregionmainsettingsmenu' => !empty($this->region_main_settings_menu()),
     'user' => $user,
-    'progress' => $progress,
-    'recent_activity' => $recent_activity,
     'course' => $course,
     'context' => $context,
+    'course_stats' => $course_stats,
 ];
 
-echo $OUTPUT->render_from_template('theme_next/dashboard', $templatecontext);
+echo $OUTPUT->render_from_template('theme_next/course', $templatecontext);

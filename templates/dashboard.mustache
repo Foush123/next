@@ -1,144 +1,269 @@
-{{! Dashboard Template for Modern Theme }}
-<div class="dashboard-container">
-    {{! Top Cards Grid }}
-    <div class="dashboard-grid">
-        {{! Avg Quiz Score Card }}
-        <div class="dashboard-card card-small">
-            <div class="card-header">
-                <h3 class="card-title">{{#str}}avgquizscore, theme_photo{{/str}}</h3>
-            </div>
-            <div class="metric-value">82%</div>
-            <div class="metric-change negative">
-                <span class="change-icon">▼</span>
-                -10%
-            </div>
-            <div class="progress-container">
-                <div class="progress-item">
-                    <span class="progress-label">{{#str}}highestscore, theme_photo{{/str}}</span>
-                    <span class="progress-value">92.5%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill primary" style="width: 92.5%"></div>
-                </div>
-                <div class="progress-item">
-                    <span class="progress-label">{{#str}}lowestscore, theme_photo{{/str}}</span>
-                    <span class="progress-value">64.25%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill secondary" style="width: 64.25%"></div>
-                </div>
-            </div>
-        </div>
+{{!
+    This file is part of Moodle - http://moodle.org/
 
-        {{! Total Time Spent Card }}
-        <div class="dashboard-card card-small">
-            <div class="card-header">
-                <h3 class="card-title">{{#str}}totaltimespent, theme_photo{{/str}}</h3>
-                <span class="card-subtitle">{{#str}}thisweek, theme_photo{{/str}}</span>
-            </div>
-            <div class="metric-value">12 Hours</div>
-            <div class="metric-change negative">
-                <span class="change-icon">▼</span>
-                -12.00%
-            </div>
-            <div class="mini-chart">
-                <div class="chart-bars">
-                    <div class="chart-bar" style="height: 20%"></div>
-                    <div class="chart-bar" style="height: 35%"></div>
-                    <div class="chart-bar" style="height: 25%"></div>
-                    <div class="chart-bar" style="height: 40%"></div>
-                    <div class="chart-bar" style="height: 30%"></div>
-                    <div class="chart-bar" style="height: 45%"></div>
-                    <div class="chart-bar active" style="height: 90%"></div>
-                </div>
-                <div class="chart-label">9.5H</div>
-            </div>
-        </div>
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-        {{! Weekly Streak Card }}
-        <div class="dashboard-card card-small">
-            <div class="card-header">
-                <h3 class="card-title">{{#str}}weeklystreak, theme_photo{{/str}}</h3>
-            </div>
-            <div class="metric-value">5 Days</div>
-            <div class="streak-container">
-                <div class="streak-days">
-                    <div class="streak-day completed">01</div>
-                    <div class="streak-day completed">02</div>
-                    <div class="streak-day completed">03</div>
-                    <div class="streak-day completed">04</div>
-                    <div class="streak-day completed">05</div>
-                    <div class="streak-day incomplete">06</div>
-                    <div class="streak-day incomplete">07</div>
-                    <div class="streak-day incomplete">08</div>
-                    <div class="streak-day incomplete">09</div>
-                    <div class="streak-day incomplete">10</div>
-                </div>
-                <div class="streak-info">{{#str}}longeststreak, theme_photo{{/str}}: 15 days</div>
-            </div>
-        </div>
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-        {{! Global Ranking Card }}
-        <div class="dashboard-card card-small">
-            <div class="card-header">
-                <h3 class="card-title">{{#str}}globalranking, theme_photo{{/str}}</h3>
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_next/dashboard
+
+    Next theme dashboard template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * user - The current user object
+    * progress - User learning progress data
+    * recent_activity - Recent user activity
+}}
+
+<div class="dashboard-container animate-fade-in">
+    <!-- Welcome Section -->
+    <div class="dashboard-card card-featured mb-4">
+        <div class="card-header">
+            <div>
+                <h1 class="card-title">Welcome back, {{user.firstname}}!</h1>
+                <p class="card-subtitle">Ready to continue your learning journey?</p>
             </div>
-            <div class="metric-value">#15</div>
-            <div class="metric-label">of 23K {{#str}}oflearners, theme_photo{{/str}}</div>
-            <div class="metric-label">{{#str}}toplocalrank, theme_photo{{/str}}</div>
-            <div class="ranking-container">
-                <div class="ranking-list">
-                    <div class="ranking-item">
-                        <div class="avatar">BS</div>
-                        <div class="name">Brooklyn Simmons</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="avatar">AB</div>
-                        <div class="name">Annette Black</div>
-                    </div>
-                    <div class="ranking-item">
-                        <div class="avatar">GH</div>
-                        <div class="name">Guy Hawkins</div>
-                    </div>
-                </div>
+            <div class="card-icon">
+                <i class="fas fa-graduation-cap"></i>
             </div>
         </div>
     </div>
 
-    {{! Large Chart Card }}
-    <div class="dashboard-card card-large">
+    <!-- Learning Progress Grid -->
+    <div class="dashboard-grid">
+        <!-- Courses Completed Card -->
+        <div class="dashboard-card card-small animate-fade-in-up">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div>
+                    <h3 class="card-title">Courses Completed</h3>
+                    <p class="card-subtitle">Your achievements</p>
+                </div>
+            </div>
+            <div class="metric-value">{{progress.completed_courses}}</div>
+            <div class="metric-label">out of {{progress.enrolled_courses}} enrolled</div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill primary" style="width: {{#progress}}{{#if enrolled_courses}}{{completed_courses}}/{{enrolled_courses}}*100{{/if}}{{/progress}}%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Performance Card -->
+        <div class="dashboard-card card-small animate-fade-in-up">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <h3 class="card-title">Quiz Performance</h3>
+                    <p class="card-subtitle">Average score</p>
+                </div>
+            </div>
+            <div class="metric-value">{{#progress}}{{#if avg_quiz_score}}{{avg_quiz_score}}%{{else}}N/A{{/if}}{{/progress}}</div>
+            <div class="metric-label">{{progress.quiz_attempts}} attempts</div>
+            <div class="metric-change positive">
+                <span class="change-icon">↗</span>
+                Keep it up!
+            </div>
+        </div>
+
+        <!-- Learning Streak Card -->
+        <div class="dashboard-card card-small animate-fade-in-up">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div>
+                    <h3 class="card-title">Learning Streak</h3>
+                    <p class="card-subtitle">Days in a row</p>
+                </div>
+            </div>
+            <div class="metric-value">7</div>
+            <div class="metric-label">Current streak</div>
+            <div class="metric-change positive">
+                <span class="change-icon">🔥</span>
+                On fire!
+            </div>
+        </div>
+
+        <!-- Time Spent Card -->
+        <div class="dashboard-card card-small animate-fade-in-up">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                    <h3 class="card-title">Time Spent</h3>
+                    <p class="card-subtitle">This week</p>
+                </div>
+            </div>
+            <div class="metric-value">24h</div>
+            <div class="metric-label">Total learning time</div>
+            <div class="metric-change positive">
+                <span class="change-icon">⏱️</span>
+                +2h from last week
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="dashboard-card card-large animate-fade-in-up">
+        <div class="card-header">
+            <h3 class="card-title">Recent Activity</h3>
+            <button class="btn btn-ghost">View All</button>
+        </div>
+        <div class="recent-activity-list">
+            {{#recent_activity}}
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="activity-content">
+                    <h4 class="activity-title">{{fullname}}</h4>
+                    <p class="activity-description">{{summary}}</p>
+                    <span class="activity-date">{{#startdate}}{{startdate}}{{/startdate}}</span>
+                </div>
+                <div class="activity-action">
+                    <button class="btn btn-primary btn-sm">Continue</button>
+                </div>
+            </div>
+            {{/recent_activity}}
+        </div>
+    </div>
+
+    <!-- Learning Analytics Chart -->
+    <div class="dashboard-card card-large animate-fade-in-up">
         <div class="chart-container">
             <div class="chart-header">
-                <h3 class="chart-title">{{#str}}monthlyenrollments, theme_photo{{/str}}</h3>
+                <h3 class="chart-title">Learning Progress</h3>
                 <div class="chart-controls">
                     <div class="time-selector">
-                        <button class="time-btn active" data-period="1-year">1 Year</button>
-                        <button class="time-btn" data-period="6-months">6 Months</button>
+                        <button class="time-btn active" data-period="1-month">1 Month</button>
                         <button class="time-btn" data-period="3-months">3 Months</button>
-                        <button class="time-btn" data-period="1-month">1 Month</button>
+                        <button class="time-btn" data-period="6-months">6 Months</button>
+                        <button class="time-btn" data-period="1-year">1 Year</button>
                     </div>
-                </div>
-            </div>
-            <div class="metric-value">{{#str}}avgpermonth, theme_photo{{/str}}: 1,250,00</div>
-            <div class="metric-change positive">
-                <span class="change-icon">▲</span>
-                13.4%
-            </div>
-            <div class="chart-legend">
-                <div class="legend-item">
-                    <div class="legend-dot primary"></div>
-                    <span>{{#str}}completionrate, theme_photo{{/str}}</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-dot secondary"></div>
-                    <span>{{#str}}enrollments, theme_photo{{/str}}</span>
                 </div>
             </div>
             <div class="chart-content">
                 <div class="chart-placeholder">
-                    <canvas id="enrollmentChart" width="800" height="200"></canvas>
+                    <canvas id="learningProgressChart" width="800" height="200"></canvas>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Sidebar Blocks -->
+    {{#hasblocks}}
+    <div class="dashboard-sidebar">
+        <div class="sidebar-blocks">
+            {{{sidepreblocks}}}
+        </div>
+        <div class="sidebar-blocks">
+            {{{sidepostblocks}}}
+        </div>
+    </div>
+    {{/hasblocks}}
 </div>
+
+<style>
+.dashboard-sidebar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.sidebar-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.recent-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(248, 250, 252, 0.5);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(226, 232, 240, 0.3);
+    transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: rgba(99, 102, 241, 0.2);
+    transform: translateY(-1px);
+}
+
+.activity-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.25rem 0;
+}
+
+.activity-description {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+}
+
+.activity-date {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.activity-action {
+    margin-left: 1rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+</style>

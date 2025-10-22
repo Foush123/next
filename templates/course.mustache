@@ -1,0 +1,598 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_next/course
+
+    Next theme course template.
+
+    Context variables required for this template:
+    * sitename - The name of the site
+    * output - The core renderer for the page
+    * bodyattributes - attributes for the body tag as a string of html attributes
+    * sidepreblocks - HTML for the blocks
+    * hasblocks - true if there are blocks on this page
+    * user - The current user object
+    * course - The current course object
+    * course_stats - Course statistics
+}}
+
+<div class="course-container animate-fade-in">
+    <!-- Course Header -->
+    <div class="course-header">
+        <div class="course-header-content">
+            <h1 class="course-title">{{course.fullname}}</h1>
+            <p class="course-subtitle">{{course.summary}}</p>
+            <div class="course-meta">
+                <div class="course-meta-item">
+                    <i class="fas fa-users"></i>
+                    <span>{{course_stats.total_users}} enrolled</span>
+                </div>
+                <div class="course-meta-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>{{course_stats.completion_rate}}% completion rate</span>
+                </div>
+                <div class="course-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Started {{#course}}{{#startdate}}{{startdate}}{{/startdate}}{{/course}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="course-header-actions">
+            <button class="btn btn-primary">
+                <i class="fas fa-play"></i>
+                Continue Learning
+            </button>
+            <button class="btn btn-ghost">
+                <i class="fas fa-bookmark"></i>
+                Bookmark
+            </button>
+        </div>
+    </div>
+
+    <!-- Course Progress -->
+    <div class="course-progress-section">
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3 class="card-title">Your Progress</h3>
+                <span class="progress-percentage">75%</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill primary" style="width: 75%"></div>
+                </div>
+                <div class="progress-details">
+                    <div class="progress-item">
+                        <span class="progress-label">Completed Modules</span>
+                        <span class="progress-value">6/8</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Time Spent</span>
+                        <span class="progress-value">12h 30m</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Next Due</span>
+                        <span class="progress-value">Assignment 3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Content Grid -->
+    <div class="course-content-grid">
+        <!-- Main Content -->
+        <div class="course-main-content">
+            <div class="course-content">
+                <div class="course-navigation">
+                    <div class="nav-tabs">
+                        <button class="nav-tab active" data-tab="overview">
+                            <i class="fas fa-home"></i>
+                            Overview
+                        </button>
+                        <button class="nav-tab" data-tab="modules">
+                            <i class="fas fa-list"></i>
+                            Modules
+                        </button>
+                        <button class="nav-tab" data-tab="assignments">
+                            <i class="fas fa-tasks"></i>
+                            Assignments
+                        </button>
+                        <button class="nav-tab" data-tab="discussions">
+                            <i class="fas fa-comments"></i>
+                            Discussions
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="overview">
+                        <div class="course-overview">
+                            <h2>Course Overview</h2>
+                            <p>Welcome to this comprehensive course designed to enhance your skills and knowledge. This course covers essential topics and provides hands-on experience through practical exercises.</p>
+                            
+                            <div class="course-objectives">
+                                <h3>Learning Objectives</h3>
+                                <ul class="objectives-list">
+                                    <li><i class="fas fa-check"></i> Master fundamental concepts</li>
+                                    <li><i class="fas fa-check"></i> Apply knowledge in real-world scenarios</li>
+                                    <li><i class="fas fa-check"></i> Develop critical thinking skills</li>
+                                    <li><i class="fas fa-check"></i> Collaborate effectively with peers</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="modules">
+                        <div class="modules-list">
+                            <div class="module-item">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-play-circle"></i>
+                                    </div>
+                                    <div class="module-info">
+                                        <h4 class="module-title">Introduction to the Course</h4>
+                                        <p class="module-description">Get started with the fundamentals</p>
+                                    </div>
+                                    <div class="module-status completed">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="module-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill primary" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="module-item">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <div class="module-info">
+                                        <h4 class="module-title">Core Concepts</h4>
+                                        <p class="module-description">Deep dive into the main topics</p>
+                                    </div>
+                                    <div class="module-status in-progress">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <div class="module-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill primary" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="module-item">
+                                <div class="module-header">
+                                    <div class="module-icon">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div class="module-info">
+                                        <h4 class="module-title">Advanced Topics</h4>
+                                        <p class="module-description">Explore advanced concepts</p>
+                                    </div>
+                                    <div class="module-status locked">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                </div>
+                                <div class="module-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="assignments">
+                        <div class="assignments-list">
+                            <div class="assignment-item">
+                                <div class="assignment-header">
+                                    <h4 class="assignment-title">Assignment 1: Research Paper</h4>
+                                    <span class="assignment-due">Due: Dec 15, 2024</span>
+                                </div>
+                                <div class="assignment-status submitted">
+                                    <i class="fas fa-check-circle"></i>
+                                    Submitted
+                                </div>
+                            </div>
+
+                            <div class="assignment-item">
+                                <div class="assignment-header">
+                                    <h4 class="assignment-title">Assignment 2: Group Project</h4>
+                                    <span class="assignment-due">Due: Dec 22, 2024</span>
+                                </div>
+                                <div class="assignment-status in-progress">
+                                    <i class="fas fa-clock"></i>
+                                    In Progress
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="discussions">
+                        <div class="discussions-list">
+                            <div class="discussion-item">
+                                <div class="discussion-header">
+                                    <h4 class="discussion-title">Weekly Discussion: Course Topics</h4>
+                                    <span class="discussion-posts">15 posts</span>
+                                </div>
+                                <div class="discussion-latest">
+                                    <span class="latest-post">Latest: 2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        {{#hasblocks}}
+        <div class="course-sidebar">
+            <div class="sidebar-blocks">
+                {{{sidepreblocks}}}
+            </div>
+            <div class="sidebar-blocks">
+                {{{sidepostblocks}}}
+            </div>
+        </div>
+        {{/hasblocks}}
+    </div>
+</div>
+
+<style>
+.course-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.course-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.course-header-content {
+    flex: 1;
+}
+
+.course-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+}
+
+.course-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin: 0 0 2rem 0;
+    line-height: 1.6;
+}
+
+.course-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.course-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+.course-header-actions {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.course-progress-section {
+    margin-bottom: 2rem;
+}
+
+.course-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+.course-main-content {
+    min-width: 0;
+}
+
+.course-navigation {
+    margin-bottom: 2rem;
+}
+
+.nav-tabs {
+    display: flex;
+    background: rgba(248, 250, 252, 0.8);
+    border-radius: 0.75rem;
+    padding: 0.25rem;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.nav-tab {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.nav-tab.active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+}
+
+.tab-content {
+    margin-top: 2rem;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.course-overview h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1e293b;
+}
+
+.course-objectives {
+    margin-top: 2rem;
+}
+
+.objectives-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.objectives-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.objectives-list li:last-child {
+    border-bottom: none;
+}
+
+.objectives-list li i {
+    color: #10b981;
+    font-size: 0.875rem;
+}
+
+.modules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.module-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    transition: all 0.3s ease;
+}
+
+.module-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.module-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.module-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+}
+
+.module-info {
+    flex: 1;
+}
+
+.module-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: #1e293b;
+}
+
+.module-description {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.module-status {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.module-status.completed {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.module-status.in-progress {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.module-status.locked {
+    background: rgba(100, 116, 139, 0.1);
+    color: #64748b;
+}
+
+.module-progress {
+    margin-top: 1rem;
+}
+
+.assignments-list,
+.discussions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.assignment-item,
+.discussion-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    transition: all 0.3s ease;
+}
+
+.assignment-item:hover,
+.discussion-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.assignment-header,
+.discussion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.assignment-title,
+.discussion-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1e293b;
+}
+
+.assignment-due {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.assignment-status {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.assignment-status.submitted {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.assignment-status.in-progress {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.course-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .course-content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .course-sidebar {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-header {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .course-header-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .nav-tabs {
+        flex-direction: column;
+    }
+    
+    .course-meta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+</style>

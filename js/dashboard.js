@@ -1,171 +1,306 @@
 /**
- * Dashboard JavaScript for Photo Theme
- * Handles interactive elements and chart functionality
+ * Dashboard functionality for the Next theme.
+ *
+ * @module theme_next/dashboard
+ * @copyright  2024 Next LMS
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/chartjs'], function($, Chart) {
-    'use strict';
-
+define(['jquery', 'core/ajax', 'core/notification'], function($, Ajax, Notification) {
+    
     var Dashboard = {
+        
+        /**
+         * Initialize the dashboard functionality.
+         */
         init: function() {
-            this.initTimeSelector();
-            this.initCharts();
             this.initProgressBars();
-            this.initStreakDays();
+            this.initCharts();
+            this.initInteractions();
+            this.initAnimations();
         },
-
-        initTimeSelector: function() {
-            $('.time-btn').on('click', function() {
-                var $this = $(this);
-                var period = $this.data('period');
-                
-                // Remove active class from all buttons
-                $('.time-btn').removeClass('active');
-                
-                // Add active class to clicked button
-                $this.addClass('active');
-                
-                // Update chart data based on selected period
-                Dashboard.updateChartData(period);
-            });
-        },
-
-        updateChartData: function(period) {
-            // This would typically make an AJAX call to get new data
-            // For now, we'll just show a loading state
-            var $chartContent = $('.chart-content');
-            $chartContent.html('<div class="chart-placeholder">Loading data for ' + period + '...</div>');
-            
-            // Simulate loading delay
-            setTimeout(function() {
-                Dashboard.renderChart();
-            }, 1000);
-        },
-
-        initCharts: function() {
-            this.renderChart();
-        },
-
-        renderChart: function() {
-            var ctx = document.getElementById('enrollmentChart');
-            if (!ctx) return;
-
-            // Sample data - in real implementation, this would come from the server
-            var chartData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Completion Rate (%)',
-                    data: [75, 85, 70, 80, 90, 75, 85, 78, 82, 88, 85, 90],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0.4
-                }, {
-                    label: 'Enrollments',
-                    data: [200, 250, 180, 300, 350, 280, 350, 320, 290, 380, 340, 400],
-                    backgroundColor: 'rgba(245, 158, 11, 0.6)',
-                    borderColor: '#f59e0b',
-                    borderWidth: 1,
-                    type: 'bar'
-                }]
-            };
-
-            var config = {
-                type: 'line',
-                data: chartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
-                    },
-                    plugins: {
-                        legend: {
-                            display: false // We have our own legend
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: '#3b82f6',
-                            borderWidth: 1,
-                            callbacks: {
-                                title: function(context) {
-                                    return context[0].label + ' 2024';
-                                },
-                                label: function(context) {
-                                    if (context.datasetIndex === 0) {
-                                        return 'Completion: ' + context.parsed.y + '%';
-                                    } else {
-                                        return 'Enrollments: ' + context.parsed.y;
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: '#64748b'
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: '#f1f5f9'
-                            },
-                            ticks: {
-                                color: '#64748b'
-                            }
-                        }
-                    }
-                }
-            };
-
-            // Destroy existing chart if it exists
-            if (window.enrollmentChartInstance) {
-                window.enrollmentChartInstance.destroy();
-            }
-
-            // Create new chart
-            window.enrollmentChartInstance = new Chart(ctx, config);
-        },
-
+        
+        /**
+         * Initialize progress bars with animations.
+         */
         initProgressBars: function() {
-            // Animate progress bars on page load
             $('.progress-fill').each(function() {
                 var $this = $(this);
-                var width = $this.data('width') || $this.attr('style').match(/width:\s*(\d+\.?\d*)%/);
+                var width = $this.data('width') || $this.attr('style').match(/width:\s*(\d+%)/);
+                
                 if (width) {
                     $this.css('width', '0%');
                     setTimeout(function() {
-                        $this.animate({
-                            width: width[1] + '%'
-                        }, 1000);
-                    }, 500);
+                        $this.css('width', width);
+                    }, 300);
                 }
             });
         },
-
-        initStreakDays: function() {
-            // Add hover effects to streak days
-            $('.streak-day').hover(
-                function() {
-                    $(this).css('transform', 'scale(1.1)');
-                },
-                function() {
-                    $(this).css('transform', 'scale(1)');
+        
+        /**
+         * Initialize charts and visualizations.
+         */
+        initCharts: function() {
+            this.initLearningProgressChart();
+            this.initTimeSelector();
+        },
+        
+        /**
+         * Initialize the learning progress chart.
+         */
+        initLearningProgressChart: function() {
+            var canvas = document.getElementById('learningProgressChart');
+            if (!canvas) return;
+            
+            var ctx = canvas.getContext('2d');
+            var data = {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Learning Progress',
+                    data: [20, 45, 70, 85],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            };
+            
+            // Simple chart implementation
+            this.drawSimpleChart(ctx, data);
+        },
+        
+        /**
+         * Draw a simple chart without external libraries.
+         */
+        drawSimpleChart: function(ctx, data) {
+            var canvas = ctx.canvas;
+            var width = canvas.width;
+            var height = canvas.height;
+            var padding = 40;
+            var chartWidth = width - (padding * 2);
+            var chartHeight = height - (padding * 2);
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            
+            // Horizontal grid lines
+            for (var i = 0; i <= 4; i++) {
+                var y = padding + (chartHeight / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+            
+            // Vertical grid lines
+            for (var i = 0; i <= data.labels.length; i++) {
+                var x = padding + (chartWidth / data.labels.length) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, padding);
+                ctx.lineTo(x, height - padding);
+                ctx.stroke();
+            }
+            
+            // Draw data line
+            ctx.strokeStyle = '#6366f1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            data.datasets[0].data.forEach(function(value, index) {
+                var x = padding + (chartWidth / (data.labels.length - 1)) * index;
+                var y = height - padding - (value / 100) * chartHeight;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
                 }
-            );
+            });
+            ctx.stroke();
+            
+            // Draw data points
+            ctx.fillStyle = '#6366f1';
+            data.datasets[0].data.forEach(function(value, index) {
+                var x = padding + (chartWidth / (data.labels.length - 1)) * index;
+                var y = height - padding - (value / 100) * chartHeight;
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            
+            // Draw labels
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            
+            data.labels.forEach(function(label, index) {
+                var x = padding + (chartWidth / (data.labels.length - 1)) * index;
+                ctx.fillText(label, x, height - 10);
+            });
+        },
+        
+        /**
+         * Initialize time selector functionality.
+         */
+        initTimeSelector: function() {
+            $('.time-btn').on('click', function() {
+                $('.time-btn').removeClass('active');
+                $(this).addClass('active');
+                
+                var period = $(this).data('period');
+                Dashboard.updateChartData(period);
+            });
+        },
+        
+        /**
+         * Update chart data based on selected time period.
+         */
+        updateChartData: function(period) {
+            // Simulate data loading
+            var data = {
+                '1-month': {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        data: [20, 45, 70, 85]
+                    }]
+                },
+                '3-months': {
+                    labels: ['Month 1', 'Month 2', 'Month 3'],
+                    datasets: [{
+                        data: [30, 60, 85]
+                    }]
+                },
+                '6-months': {
+                    labels: ['Q1', 'Q2'],
+                    datasets: [{
+                        data: [40, 80]
+                    }]
+                },
+                '1-year': {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    datasets: [{
+                        data: [25, 50, 75, 90]
+                    }]
+                }
+            };
+            
+            // Update chart with new data
+            var chartData = data[period];
+            if (chartData) {
+                // Re-render chart with new data
+                setTimeout(function() {
+                    var canvas = document.getElementById('learningProgressChart');
+                    if (canvas) {
+                        var ctx = canvas.getContext('2d');
+                        Dashboard.drawSimpleChart(ctx, chartData);
+                    }
+                }, 300);
+            }
+        },
+        
+        /**
+         * Initialize interactive elements.
+         */
+        initInteractions: function() {
+            this.initCardHovers();
+            this.initButtonInteractions();
+        },
+        
+        /**
+         * Initialize card hover effects.
+         */
+        initCardHovers: function() {
+            $('.dashboard-card').on('mouseenter', function() {
+                $(this).addClass('hovered');
+            }).on('mouseleave', function() {
+                $(this).removeClass('hovered');
+            });
+        },
+        
+        /**
+         * Initialize button interactions.
+         */
+        initButtonInteractions: function() {
+            $('.btn').on('click', function(e) {
+                // Add ripple effect
+                var $btn = $(this);
+                var ripple = $('<span class="ripple"></span>');
+                var rect = this.getBoundingClientRect();
+                var size = Math.max(rect.width, rect.height);
+                var x = e.clientX - rect.left - size / 2;
+                var y = e.clientY - rect.top - size / 2;
+                
+                ripple.css({
+                    width: size,
+                    height: size,
+                    left: x,
+                    top: y
+                });
+                
+                $btn.append(ripple);
+                
+                setTimeout(function() {
+                    ripple.remove();
+                }, 600);
+            });
+        },
+        
+        /**
+         * Initialize animations.
+         */
+        initAnimations: function() {
+            this.initScrollAnimations();
+            this.initCounterAnimations();
+        },
+        
+        /**
+         * Initialize scroll-triggered animations.
+         */
+        initScrollAnimations: function() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            $('.dashboard-card, .metric-value').each(function() {
+                observer.observe(this);
+            });
+        },
+        
+        /**
+         * Initialize counter animations.
+         */
+        initCounterAnimations: function() {
+            $('.metric-value').each(function() {
+                var $this = $(this);
+                var target = parseInt($this.text());
+                var duration = 2000;
+                var start = 0;
+                var increment = target / (duration / 16);
+                
+                var timer = setInterval(function() {
+                    start += increment;
+                    if (start >= target) {
+                        $this.text(target);
+                        clearInterval(timer);
+                    } else {
+                        $this.text(Math.floor(start));
+                    }
+                }, 16);
+            });
         }
     };
-
-    return {
-        init: Dashboard.init
-    };
+    
+    return Dashboard;
 });
