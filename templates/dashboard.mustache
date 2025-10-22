@@ -1,0 +1,129 @@
+{{! Dashboard Template for Modern Theme }}
+<div class="dashboard-container">
+    {{! Top Cards Grid }}
+    <div class="dashboard-grid">
+        {{! Avg Quiz Score Card }}
+        <div class="dashboard-card card-small">
+            <div class="card-header">
+                <h3 class="card-title">Avg Quiz Score</h3>
+            </div>
+            <div class="metric-value">{{avg_quiz_score}}%</div>
+            <div class="metric-change negative">
+                <span class="change-icon">▼</span>
+                {{quiz_score_change}}%
+            </div>
+            <div class="progress-container">
+                <div class="progress-item">
+                    <span class="progress-label">Highest Score</span>
+                    <span class="progress-value">{{highest_score}}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill primary" style="width: {{highest_score}}%"></div>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-label">Lowest Score</span>
+                    <span class="progress-value">{{lowest_score}}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill secondary" style="width: {{lowest_score}}%"></div>
+                </div>
+            </div>
+        </div>
+
+        {{! Total Time Spent Card }}
+        <div class="dashboard-card card-small">
+            <div class="card-header">
+                <h3 class="card-title">Total Time Spent</h3>
+                <span class="card-subtitle">This Week</span>
+            </div>
+            <div class="metric-value">{{total_time_spent}}</div>
+            <div class="metric-change negative">
+                <span class="change-icon">▼</span>
+                {{time_change}}%
+            </div>
+            <div class="mini-chart">
+                <div class="chart-bars">
+                    {{#time_chart_data}}
+                    <div class="chart-bar {{#highlighted}}highlighted{{/highlighted}} {{#active}}active{{/active}}" style="height: {{height}}%"></div>
+                    {{/time_chart_data}}
+                </div>
+                <div class="chart-label">{{highlighted_day}}</div>
+            </div>
+        </div>
+
+        {{! Weekly Streak Card }}
+        <div class="dashboard-card card-small">
+            <div class="card-header">
+                <h3 class="card-title">Weekly Streak</h3>
+            </div>
+            <div class="metric-value">{{current_streak}} Days</div>
+            <div class="streak-container">
+                <div class="streak-days">
+                    {{#streak_days}}
+                    <div class="streak-day {{#completed}}completed{{/completed}} {{^completed}}incomplete{{/completed}}">
+                        {{day_number}}
+                    </div>
+                    {{/streak_days}}
+                </div>
+                <div class="streak-info">Longest Streak: {{longest_streak}} days</div>
+            </div>
+        </div>
+
+        {{! Global Ranking Card }}
+        <div class="dashboard-card card-small">
+            <div class="card-header">
+                <h3 class="card-title">Global Ranking</h3>
+            </div>
+            <div class="metric-value">#{{current_rank}}</div>
+            <div class="metric-label">of {{total_learners}} learners</div>
+            <div class="metric-label">Top local rank</div>
+            <div class="ranking-container">
+                <div class="ranking-list">
+                    {{#top_users}}
+                    <div class="ranking-item">
+                        <div class="avatar">{{initials}}</div>
+                        <div class="name">{{name}}</div>
+                    </div>
+                    {{/top_users}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{! Large Chart Card }}
+    <div class="dashboard-card card-large">
+        <div class="chart-container">
+            <div class="chart-header">
+                <h3 class="chart-title">Monthly Course Enrollments & Completion Rates</h3>
+                <div class="chart-controls">
+                    <div class="time-selector">
+                        <button class="time-btn {{#active_year}}active{{/active_year}}" data-period="1-year">1 Year</button>
+                        <button class="time-btn {{#active_6months}}active{{/active_6months}}" data-period="6-months">6 Months</button>
+                        <button class="time-btn {{#active_3months}}active{{/active_3months}}" data-period="3-months">3 Months</button>
+                        <button class="time-btn {{#active_month}}active{{/active_month}}" data-period="1-month">1 Month</button>
+                    </div>
+                </div>
+            </div>
+            <div class="metric-value">{{avg_enrollments}}</div>
+            <div class="metric-change positive">
+                <span class="change-icon">▲</span>
+                {{enrollment_change}}%
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-dot primary"></div>
+                    <span>Completion Rate (%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot secondary"></div>
+                    <span>Enrollments</span>
+                </div>
+            </div>
+            <div class="chart-content">
+                <div class="chart-placeholder">
+                    <canvas id="enrollmentChart" width="800" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

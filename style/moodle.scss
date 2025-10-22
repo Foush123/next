@@ -1,0 +1,517 @@
+// Modern Dashboard Theme for Moodle
+// Based on the clean, modern dashboard design
+
+// Import Bootstrap 4 variables and mixins
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+// Color Variables
+$primary-color: #3b82f6; // Blue
+$secondary-color: #f59e0b; // Orange
+$success-color: #10b981; // Green
+$danger-color: #ef4444; // Red
+$warning-color: #f59e0b; // Orange
+$info-color: #06b6d4; // Cyan
+$light-color: #f8fafc; // Light gray
+$dark-color: #1e293b; // Dark gray
+$muted-color: #64748b; // Muted gray
+
+// Dashboard specific colors
+$card-bg: #ffffff;
+$card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+
+// Typography
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-size-base: 0.875rem;
+$font-size-lg: 1rem;
+$font-size-xl: 1.125rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2rem;
+$font-size-4xl: 2.5rem;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+// Global Styles
+body {
+    font-family: $font-family-sans-serif;
+    background-color: $light-color;
+    color: $dark-color;
+    line-height: 1.6;
+}
+
+// Dashboard Container
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $spacing-lg;
+}
+
+// Card Component
+.dashboard-card {
+    background: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    transition: box-shadow 0.2s ease-in-out;
+    
+    &:hover {
+        box-shadow: $card-shadow-hover;
+    }
+    
+    &.card-small {
+        padding: $spacing-md;
+    }
+    
+    &.card-large {
+        padding: $spacing-xl;
+    }
+}
+
+// Card Grid Layout
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    margin-bottom: $spacing-xl;
+}
+
+// Card Header
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-md;
+    
+    .card-title {
+        font-size: $font-size-lg;
+        font-weight: 600;
+        color: $dark-color;
+        margin: 0;
+    }
+    
+    .card-subtitle {
+        font-size: $font-size-base;
+        color: $muted-color;
+        margin: 0;
+    }
+}
+
+// Metric Display
+.metric {
+    &-value {
+        font-size: $font-size-4xl;
+        font-weight: 700;
+        color: $dark-color;
+        margin: $spacing-sm 0;
+        line-height: 1;
+    }
+    
+    &-change {
+        display: flex;
+        align-items: center;
+        font-size: $font-size-sm;
+        font-weight: 500;
+        
+        &.positive {
+            color: $success-color;
+        }
+        
+        &.negative {
+            color: $danger-color;
+        }
+        
+        &.neutral {
+            color: $muted-color;
+        }
+        
+        .change-icon {
+            margin-right: $spacing-xs;
+            font-size: $font-size-xs;
+        }
+    }
+    
+    &-label {
+        font-size: $font-size-sm;
+        color: $muted-color;
+        margin-bottom: $spacing-xs;
+    }
+}
+
+// Progress Bars
+.progress-container {
+    margin-top: $spacing-md;
+    
+    .progress-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-sm;
+        
+        .progress-label {
+            font-size: $font-size-sm;
+            color: $muted-color;
+        }
+        
+        .progress-value {
+            font-size: $font-size-sm;
+            font-weight: 600;
+            color: $dark-color;
+        }
+    }
+    
+    .progress-bar {
+        height: 8px;
+        background-color: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: $spacing-xs;
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            
+            &.primary {
+                background-color: $primary-color;
+            }
+            
+            &.secondary {
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
+
+// Mini Chart
+.mini-chart {
+    margin-top: $spacing-md;
+    
+    .chart-bars {
+        display: flex;
+        align-items: end;
+        gap: 2px;
+        height: 40px;
+        
+        .chart-bar {
+            flex: 1;
+            background-color: #e2e8f0;
+            border-radius: 2px;
+            transition: background-color 0.2s ease;
+            
+            &.active {
+                background-color: $primary-color;
+                background-image: repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.1) 2px,
+                    rgba(255, 255, 255, 0.1) 4px
+                );
+            }
+            
+            &.highlighted {
+                background-color: $primary-color;
+            }
+        }
+    }
+    
+    .chart-label {
+        font-size: $font-size-xs;
+        color: $muted-color;
+        text-align: center;
+        margin-top: $spacing-xs;
+    }
+}
+
+// Streak Component
+.streak-container {
+    margin-top: $spacing-md;
+    
+    .streak-days {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: $spacing-sm;
+        
+        .streak-day {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $font-size-xs;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            
+            &.completed {
+                background-color: $primary-color;
+                color: white;
+                
+                &::after {
+                    content: '✓';
+                    font-size: 10px;
+                    margin-left: 2px;
+                }
+            }
+            
+            &.incomplete {
+                background-color: white;
+                color: $muted-color;
+                border: 1px solid #e2e8f0;
+                
+                &::after {
+                    content: '✓';
+                    font-size: 10px;
+                    margin-left: 2px;
+                    color: #e2e8f0;
+                }
+            }
+        }
+    }
+    
+    .streak-info {
+        margin-top: $spacing-sm;
+        font-size: $font-size-sm;
+        color: $muted-color;
+    }
+}
+
+// Ranking Component
+.ranking-container {
+    margin-top: $spacing-md;
+    
+    .ranking-list {
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: $spacing-sm 0;
+            border-bottom: 1px solid #f1f5f9;
+            
+            &:last-child {
+                border-bottom: none;
+            }
+            
+            .avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                margin-right: $spacing-sm;
+                background-color: $primary-color;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: 600;
+                font-size: $font-size-sm;
+            }
+            
+            .name {
+                font-size: $font-size-sm;
+                font-weight: 500;
+                color: $dark-color;
+            }
+        }
+    }
+}
+
+// Chart Component
+.chart-container {
+    margin-top: $spacing-lg;
+    
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-lg;
+        
+        .chart-title {
+            font-size: $font-size-xl;
+            font-weight: 600;
+            color: $dark-color;
+            margin: 0;
+        }
+        
+        .chart-controls {
+            display: flex;
+            gap: $spacing-sm;
+            
+            .time-selector {
+                display: flex;
+                background-color: #f1f5f9;
+                border-radius: $border-radius;
+                padding: 2px;
+                
+                .time-btn {
+                    padding: $spacing-xs $spacing-sm;
+                    border: none;
+                    background: none;
+                    border-radius: calc(#{$border-radius} - 2px);
+                    font-size: $font-size-sm;
+                    font-weight: 500;
+                    color: $muted-color;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    
+                    &.active {
+                        background-color: $primary-color;
+                        color: white;
+                    }
+                    
+                    &:hover:not(.active) {
+                        color: $dark-color;
+                    }
+                }
+            }
+        }
+    }
+    
+    .chart-legend {
+        display: flex;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-md;
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: $font-size-sm;
+            color: $muted-color;
+            
+            .legend-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: $spacing-xs;
+                
+                &.primary {
+                    background-color: $primary-color;
+                }
+                
+                &.secondary {
+                    background-color: $secondary-color;
+                }
+            }
+        }
+    }
+    
+    .chart-content {
+        position: relative;
+        height: 300px;
+        background-color: #f8fafc;
+        border-radius: $border-radius;
+        padding: $spacing-lg;
+        
+        .chart-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: $muted-color;
+            font-size: $font-size-lg;
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: $spacing-md;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: $spacing-md;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-md;
+    }
+    
+    .chart-controls {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+// Utility Classes
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: $spacing-xs; }
+.mb-2 { margin-bottom: $spacing-sm; }
+.mb-3 { margin-bottom: $spacing-md; }
+.mb-4 { margin-bottom: $spacing-lg; }
+.mb-5 { margin-bottom: $spacing-xl; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: $spacing-xs; }
+.mt-2 { margin-top: $spacing-sm; }
+.mt-3 { margin-top: $spacing-md; }
+.mt-4 { margin-top: $spacing-lg; }
+.mt-5 { margin-top: $spacing-xl; }
+
+// Override Moodle default styles
+#page {
+    background-color: $light-color;
+}
+
+.page-header {
+    background: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    margin-bottom: $spacing-lg;
+    padding: $spacing-lg;
+}
+
+.course-content {
+    background: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    padding: $spacing-lg;
+}
+
+// Navigation improvements
+.navbar {
+    background: $card-bg !important;
+    box-shadow: $card-shadow;
+    border-radius: 0 0 $border-radius $border-radius;
+}
+
+// Block styling
+.block {
+    background: $card-bg;
+    border-radius: $border-radius;
+    box-shadow: $card-shadow;
+    border: none;
+    margin-bottom: $spacing-lg;
+    
+    .header {
+        background: transparent;
+        border-bottom: 1px solid #f1f5f9;
+        padding: $spacing-md $spacing-lg;
+        
+        .title {
+            font-size: $font-size-lg;
+            font-weight: 600;
+            color: $dark-color;
+        }
+    }
+    
+    .content {
+        padding: $spacing-lg;
+    }
+}

@@ -1,0 +1,42 @@
+{{! Two Column Layout Template }}
+{{< theme_boost/columns2 }}
+    {{$pageclasses}}dashboard-layout{{/pageclasses}}
+    {{$content}}
+        <div class="dashboard-container">
+            {{! Page Header }}
+            <div class="page-header">
+                <h1>{{sitename}}</h1>
+                {{#hasregionmainsettingsmenu}}
+                <div class="region-main-settings-menu">
+                    {{{regionmainsettingsmenu}}}
+                </div>
+                {{/hasregionmainsettingsmenu}}
+            </div>
+
+            {{! Main Content Area }}
+            <div class="row">
+                <div class="col-12">
+                    <div class="course-content">
+                        {{{maincontent}}}
+                    </div>
+                </div>
+            </div>
+
+            {{! Side Blocks }}
+            {{#hasblocks}}
+            <div class="row mt-4">
+                {{#hassidepre}}
+                <div class="col-md-4">
+                    {{{sidepre}}}
+                </div>
+                {{/hassidepre}}
+                {{#hassidepost}}
+                <div class="col-md-4">
+                    {{{sidepost}}}
+                </div>
+                {{/hassidepost}}
+            </div>
+            {{/hasblocks}}
+        </div>
+    {{/content}}
+{{/ theme_boost/columns2 }}
