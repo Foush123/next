@@ -32,6 +32,11 @@ $context = $this->page->context;
 $progress = theme_next_get_learning_progress($user->id);
 $recent_activity = theme_next_get_recent_activity($user->id, 5);
 
+$completedpercent = 0;
+if (!empty($progress['enrolled_courses']) && (int)$progress['enrolled_courses'] > 0) {
+    $completedpercent = round(($progress['completed_courses'] / $progress['enrolled_courses']) * 100, 2);
+}
+
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID)]),
     'output' => $this,
@@ -43,6 +48,7 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($this->region_main_settings_menu()),
     'user' => $user,
     'progress' => $progress,
+    'progress_completed_percent' => $completedpercent,
     'recent_activity' => $recent_activity,
     'course' => $course,
     'context' => $context,

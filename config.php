@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 $THEME->name = 'next';
 
 // This setting lists the style sheets we want to include in our theme.
-$THEME->sheets = [];
+$THEME->sheets = ['moodle'];
 
 // This is a setting that can be used to provide some styling to the content in the TinyMCE text editor.
 $THEME->editor_sheets = [];

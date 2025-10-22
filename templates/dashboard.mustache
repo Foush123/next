@@ -61,7 +61,7 @@
             <div class="metric-label">out of {{progress.enrolled_courses}} enrolled</div>
             <div class="progress-container">
                 <div class="progress-bar">
-                    <div class="progress-fill primary" style="width: {{#progress}}{{#if enrolled_courses}}{{completed_courses}}/{{enrolled_courses}}*100{{/if}}{{/progress}}%"></div>
+                    <div class="progress-fill primary" data-width="{{progress_completed_percent}}%"></div>
                 </div>
             </div>
         </div>
@@ -183,87 +183,3 @@
     </div>
     {{/hasblocks}}
 </div>
-
-<style>
-.dashboard-sidebar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.sidebar-blocks {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.recent-activity-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.activity-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background: rgba(248, 250, 252, 0.5);
-    border-radius: 0.75rem;
-    border: 1px solid rgba(226, 232, 240, 0.3);
-    transition: all 0.3s ease;
-}
-
-.activity-item:hover {
-    background: rgba(99, 102, 241, 0.05);
-    border-color: rgba(99, 102, 241, 0.2);
-    transform: translateY(-1px);
-}
-
-.activity-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 0.75rem;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.25rem;
-    margin-right: 1rem;
-    flex-shrink: 0;
-}
-
-.activity-content {
-    flex: 1;
-}
-
-.activity-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin: 0 0 0.25rem 0;
-}
-
-.activity-description {
-    font-size: 0.875rem;
-    color: #64748b;
-    margin: 0 0 0.5rem 0;
-    line-height: 1.4;
-}
-
-.activity-date {
-    font-size: 0.75rem;
-    color: #94a3b8;
-    font-weight: 500;
-}
-
-.activity-action {
-    margin-left: 1rem;
-}
-
-.btn-sm {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-}
-</style>
